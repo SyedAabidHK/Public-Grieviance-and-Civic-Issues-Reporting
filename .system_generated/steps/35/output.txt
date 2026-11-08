@@ -1,0 +1,21 @@
+Command exited with code 1.
+
+Command output:
+Test-Path : Access is denied
+At line:1 char:208
++ ... OutputEncoding } catch {}; Test-Path "C:\Users\pinkm\Desktop"; Test-P ...
++                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\pinkm\Desktop:String) [Test-Path], UnauthorizedAccessExcepti 
+   on
+    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+False
+Test-Path : Access is denied
+At line:1 char:244
++ ... t-Path "C:\Users\pinkm\Desktop"; Test-Path "C:\Users\pinkm\Documents"
++                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\pinkm\Documents:String) [Test-Path], UnauthorizedAccessExcep 
+   tion
+    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+False

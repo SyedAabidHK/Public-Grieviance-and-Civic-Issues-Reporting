@@ -1,0 +1,10 @@
+Command exited with code 0.
+
+Command output:
+
+C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:459:          <input 
+type="text" id="issue-landmark" required placeholder="e.g. Near VTU College Main Gate, Beside Bus Shelter"
+C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:684:        landmark: 
+"Near VTU College Main Gate, Beside Bus Shelter",
+
+

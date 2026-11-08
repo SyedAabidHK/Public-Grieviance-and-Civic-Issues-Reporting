@@ -1,0 +1,41 @@
+Command exited with code 1.
+
+Command output:
+
+USER INFORMATION
+----------------
+
+User Name             SID                                         
+===================== ============================================
+desktop-dha1slf\pinkm S-1-5-21-721230676-3092391848-567587109-1001
+
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                                    Type             SID                                                                                                       Attributes                                        
+============================================================= ================ ========================================================================================================= ==================================================
+Mandatory Label\Low Mandatory Level                           Label            S-1-16-4096                                                                                                                                                 
+Everyone                                                      Well-known group S-1-1-0                                                                                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Local account and member of Administrators group Well-known group S-1-5-114                                                                                                 Group used for deny only                          
+BUILTIN\Administrators                                        Alias            S-1-5-32-544                                                                                              Group used for deny only                          
+BUILTIN\Users                                                 Alias            S-1-5-32-545                                                                                              Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\INTERACTIVE                                      Well-known group S-1-5-4                                                                                                   Mandatory group, Enabled by default, Enabled group
+CONSOLE LOGON                                                 Well-known group S-1-2-1                                                                                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users                              Well-known group S-1-5-11                                                                                                  Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization                                Well-known group S-1-5-15                                                                                                  Mandatory group, Enabled by default, Enabled group
+MicrosoftAccount\pinkmanj618@gmail.com                        User             S-1-11-96-3623454863-58364-18864-2661722203-1597581903-5851243-3883057608-936878736-4143842461-3313293138 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Local account                                    Well-known group S-1-5-113                                                                                                 Mandatory group, Enabled by default, Enabled group
+LOCAL                                                         Well-known group S-1-2-0                                                                                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Cloud Account Authentication                     Well-known group S-1-5-64-36                                                                                               Mandatory group, Enabled by default, Enabled group
+
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State   
+============================= ============================== ========
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled 
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+
+ERROR: Unable to get user claims information.

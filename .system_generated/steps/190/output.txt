@@ -1,0 +1,13 @@
+Command exited with code 1.
+
+Command output:
+Get-Item : Cannot find path 
+'C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\screenshot.png' because it does not 
+exist.
+At line:1 char:576
++ ... f6-e2920d9db8fb/civic_portal.html"; Get-Item "screenshot.png" | Selec ...
++                                         ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\pinkm\...\screenshot.png:String) [Get-Item], ItemNotFoundExcep 
+   tion
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetItemCommand
+ 

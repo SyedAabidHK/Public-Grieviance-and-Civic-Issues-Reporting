@@ -1,0 +1,17 @@
+Command exited with code 0.
+
+Command output:
+
+
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\Public Grieviance and civic issue reporting
+Owner  : BUILTIN\Administrators
+Group  : DESKTOP-DHA1SLF\pinkm
+Access : NT AUTHORITY\SYSTEM Allow  FullControl
+         BUILTIN\Administrators Allow  FullControl
+         BUILTIN\Users Allow  ReadAndExecute, Synchronize
+Audit  : 
+Sddl   : O:BAG:S-1-5-21-721230676-3092391848-567587109-1001D:(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;0x1200a9;;;B
+         U)
+
+
+

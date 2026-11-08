@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JanaSeva - Public Grievance & Civic Issue Reporting Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            govNavy: '#0f2444',
+            govNavyDark: '#0a1931',
+            govNavyLight: '#183b6b',
+            govGold: '#d4af37',
+            govSaffron: '#ff9933',
+            govGreen: '#138808'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f4f6fa; }
+    .badge-glow { box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- TOP GOV STRIP -->
+  <div class="bg-govNavyDark text-slate-300 text-xs py-1.5 px-4 sm:px-8 flex justify-between items-center border-b border-slate-700">
+    <div class="flex items-center space-x-3">
+      <span class="inline-flex items-center text-amber-400 font-medium">
+        <i class="fa-solid fa-bullhorn mr-1.5"></i> Citizen Civic Support Cell
+      </span>
+      <span class="hidden md:inline text-slate-500">|</span>
+      <span class="hidden md:inline text-slate-400">Citizen Civic Issue Redressal Portal</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <span class="text-slate-300"><i class="fa-solid fa-globe mr-1"></i> English</span>
+      <span class="hidden sm:inline bg-emerald-800 text-emerald-200 px-2 py-0.5 rounded text-[11px] font-semibold">
+        <i class="fa-solid fa-signal mr-1"></i> System Active
+      </span>
+    </div>
+  </div>
+
+  <!-- MAIN GOVERNMENT HEADER -->
+  <header class="bg-govNavy text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3 sm:space-x-4 cursor-pointer" onclick="switchTab('home')">
+          <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1.5 shadow-md border-2 border-amber-400/40">
+            <!-- Emblem / Civic Seal -->
+            <div class="text-center text-govNavy">
+              <i class="fa-solid fa-landmark text-2xl text-govNavy"></i>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-white font-serif">JanaSeva</h1>
+              <span class="bg-amber-500/20 text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded border border-amber-500/30">Civic Portal</span>
+            </div>
+            <p class="text-xs text-slate-300 hidden sm:block">Public Grievance and Civic Issue Reporting System</p>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-md text-sm font-medium transition text-white bg-govNavyLight">
+            <i class="fa-solid fa-house mr-1.5"></i> Home
+          </button>
+          <button onclick="switchTab('report')" id="nav-report" class="nav-btn px-3 py-2 rounded-md text-sm font-medium transition text-slate-200 hover:text-white hover:bg-govNavyLight">
+            <i class="fa-solid fa-circle-plus mr-1.5 text-amber-400"></i> Report Issue
+          </button>
+          <button onclick="switchTab('track')" id="nav-track" class="nav-btn px-3 py-2 rounded-md text-sm font-medium transition text-slate-200 hover:text-white hover:bg-govNavyLight">
+            <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Track Status
+          </button>
+          <button onclick="switchTab('issues')" id="nav-issues" class="nav-btn px-3 py-2 rounded-md text-sm font-medium transition text-slate-200 hover:text-white hover:bg-govNavyLight">
+            <i class="fa-solid fa-list-check mr-1.5"></i> Public Feed
+          </button>
+        </nav>
+
+        <!-- Right Quick Action -->
+        <div class="flex items-center space-x-2">
+          <button onclick="switchTab('report')" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm shadow-md transition flex items-center">
+            <i class="fa-solid fa-bullhorn mr-1.5"></i>
+            <span>Report Now</span>
+          </button>
+          <!-- Mobile Menu Toggle -->
+          <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2 text-lg focus:outline-none">
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-govNavyDark px-4 pt-2 pb-4 space-y-1 border-t border-slate-700">
+      <button onclick="switchTab('home')" class="w-full text-left px-3 py-2 rounded text-sm text-white font-medium hover:bg-govNavyLight"><i class="fa-solid fa-house mr-2"></i> Home</button>
+      <button onclick="switchTab('report')" class="w-full text-left px-3 py-2 rounded text-sm text-slate-200 font-medium hover:bg-govNavyLight"><i class="fa-solid fa-circle-plus mr-2 text-amber-400"></i> Report Civic Issue</button>
+      <button onclick="switchTab('track')" class="w-full text-left px-3 py-2 rounded text-sm text-slate-200 font-medium hover:bg-govNavyLight"><i class="fa-solid fa-magnifying-glass mr-2"></i> Track Issue Status</button>
+      <button onclick="switchTab('issues')" class="w-full text-left px-3 py-2 rounded text-sm text-slate-200 font-medium hover:bg-govNavyLight"><i class="fa-solid fa-list-check mr-2"></i> Public Issues Feed</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME PAGE (Matching user's image)  -->
+    <!-- ========================================== -->
+    <section id="view-home" class="space-y-8">
+      
+      <!-- HERO SECTION (Styled like reference image) -->
+      <div class="bg-gradient-to-r from-govNavy via-govNavyLight to-slate-900 rounded-2xl shadow-xl overflow-hidden text-white border border-slate-700">
+        <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+          
+          <!-- Hero Text -->
+          <div class="p-6 sm:p-10 lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-amber-400/20 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/30">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Empowering Residents & Students</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight font-serif">
+              Serving Citizens with <br><span class="text-amber-400">Transparency and Trust</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              A transparent civic initiative bridging local residents, neighborhoods, and municipal authorities. 
+              Report potholes, garbage dumps, dark streetlights, or drainage overflow in seconds and track real-time resolution.
+            </p>
+            
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button onclick="switchTab('report')" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-5 py-3 rounded-lg text-sm shadow-lg transition flex items-center">
+                <i class="fa-solid fa-circle-exclamation mr-2"></i> Report Civic Problem
+              </button>
+              <button onclick="switchTab('track')" class="bg-white/10 hover:bg-white/20 text-white font-medium px-5 py-3 rounded-lg text-sm border border-white/20 transition flex items-center">
+                <i class="fa-solid fa-magnifying-glass mr-2 text-sky-400"></i> Track Existing Issue
+              </button>
+            </div>
+
+            <!-- Trust Highlights -->
+            <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-700/60 text-xs text-slate-300">
+              <div>
+                <p class="font-bold text-white text-base">100% Free</p>
+                <p class="text-slate-400">Citizen Service</p>
+              </div>
+              <div>
+                <p class="font-bold text-amber-400 text-base">&lt; 48 Hrs</p>
+                <p class="text-slate-400">Avg. Response</p>
+              </div>
+              <div>
+                <p class="font-bold text-emerald-400 text-base">Verified</p>
+                <p class="text-slate-400">Officer Redressal</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Graphic / Civic Office Card -->
+          <div class="p-6 sm:p-8 lg:col-span-5 flex justify-center">
+            <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 w-full max-w-md shadow-2xl space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                    <i class="fa-solid fa-city"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-white">Ward Civic Control Room</h3>
+                    <p class="text-[11px] text-slate-300">Local Area Redressal Cell</p>
+                  </div>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-white">
+                  ● LIVE
+                </span>
+              </div>
+
+              <!-- Quick Status Ticker -->
+              <div class="space-y-2.5 text-xs">
+                <div class="bg-govNavyDark/80 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-rose-400"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                    <div>
+                      <p class="font-medium text-slate-200">Pothole near College Main Gate</p>
+                      <p class="text-[10px] text-slate-400">TKT-8941 • 2 hrs ago</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30">In Progress</span>
+                </div>
+
+                <div class="bg-govNavyDark/80 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-emerald-400"><i class="fa-solid fa-circle-check"></i></span>
+                    <div>
+                      <p class="font-medium text-slate-200">Streetlight repaired at Library Road</p>
+                      <p class="text-[10px] text-slate-400">TKT-8938 • Resolved today</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Resolved</span>
+                </div>
+              </div>
+
+              <div class="pt-2 text-center">
+                <button onclick="switchTab('issues')" class="text-xs text-amber-300 hover:text-amber-200 font-semibold underline underline-offset-4">
+                  View all 148 public complaints →
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CIVIC SERVICES CATEGORIES (Matching layout from image) -->
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-govNavy font-serif">What Civic Issue Do You Need Resolved?</h3>
+            <p class="text-xs text-slate-500">Select any category to quickly lodge a grievance in your area</p>
+          </div>
+          <button onclick="switchTab('report')" class="mt-2 sm:mt-0 text-xs font-semibold text-sky-700 hover:text-sky-900 flex items-center">
+            Open full reporting form <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          
+          <!-- Category 1 -->
+          <div onclick="prefillAndReport('Pothole & Roads')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-amber-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-amber-50 group-hover:bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-road"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Potholes & Roads</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Damaged asphalt, craters</p>
+          </div>
+
+          <!-- Category 2 -->
+          <div onclick="prefillAndReport('Garbage & Waste')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-emerald-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Garbage & Waste</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Overflowing bins, litter</p>
+          </div>
+
+          <!-- Category 3 -->
+          <div onclick="prefillAndReport('Streetlight Fault')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-yellow-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-yellow-50 group-hover:bg-yellow-100 text-yellow-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Streetlights</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Dark streets, bulb blown</p>
+          </div>
+
+          <!-- Category 4 -->
+          <div onclick="prefillAndReport('Water Supply Leak')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-sky-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-sky-50 group-hover:bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-faucet-drip"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Water Leaks</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Burst pipe, low pressure</p>
+          </div>
+
+          <!-- Category 5 -->
+          <div onclick="prefillAndReport('Drainage & Sewage')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-indigo-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-water"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Drainage & Sewage</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Blocked storm drains</p>
+          </div>
+
+          <!-- Category 6 -->
+          <div onclick="prefillAndReport('Public Sanitation & Others')" class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition border border-slate-200 hover:border-rose-400 cursor-pointer text-center group">
+            <div class="w-12 h-12 mx-auto rounded-full bg-rose-50 group-hover:bg-rose-100 text-rose-600 flex items-center justify-center text-xl mb-2.5 transition">
+              <i class="fa-solid fa-shield-virus"></i>
+            </div>
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-800">Sanitation & Other</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Stray menace, tree fall</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TWO COLUMN SECTION: NOTICES & LIVE STATISTICS (From reference image) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left 7 cols: Latest Announcements & Notices -->
+        <div class="lg:col-span-7 bg-white rounded-xl p-5 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+              <h3 class="font-bold text-govNavy text-base">Latest Civic Bulletins & Notices</h3>
+            </div>
+            <span class="text-xs text-slate-400 font-medium">Updated 30 mins ago</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3 bg-slate-50 rounded-lg border-l-4 border-emerald-500 hover:bg-slate-100/70 transition">
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Completed Drive</span>
+                <span class="text-[11px] text-slate-400">Nov 7, 2026</span>
+              </div>
+              <h4 class="text-sm font-semibold text-slate-800 mt-1">Ward 4 Storm-Drain Desilting Finished</h4>
+              <p class="text-xs text-slate-600 mt-0.5">Culverts and underground channels cleaned near College South Gate in preparation for monsoon showers.</p>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border-l-4 border-sky-500 hover:bg-slate-100/70 transition">
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-sky-800 uppercase tracking-wider">Public Work Underway</span>
+                <span class="text-[11px] text-slate-400">Nov 6, 2026</span>
+              </div>
+              <h4 class="text-sm font-semibold text-slate-800 mt-1">LED Streetlight Replacement on Vidyanagar Main Road</h4>
+              <p class="text-xs text-slate-600 mt-0.5">42 energy-efficient 65W LED streetlamps being mounted to resolve night visibility and safety issues.</p>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border-l-4 border-amber-500 hover:bg-slate-100/70 transition">
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Citizen Advisory</span>
+                <span class="text-[11px] text-slate-400">Nov 5, 2026</span>
+              </div>
+              <h4 class="text-sm font-semibold text-slate-800 mt-1">Door-to-Door Waste Segregation Inspection</h4>
+              <p class="text-xs text-slate-600 mt-0.5">Municipal sanitation wardens will assist households with color-coded wet/dry bins from Monday.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 cols: Transparency Statistics & Helpline (From reference image) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Stats Card -->
+          <div class="bg-govNavy text-white rounded-xl p-5 shadow-sm space-y-4">
+            <h3 class="font-bold text-sm tracking-wide uppercase text-amber-400 flex items-center">
+              <i class="fa-solid fa-chart-pie mr-2"></i> Civic Performance Metrics
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-govNavyDark/90 p-3.5 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400">Total Registered</p>
+                <p id="stat-total" class="text-2xl font-extrabold text-white mt-1">148</p>
+                <p class="text-[10px] text-emerald-400 mt-0.5">↑ 12 this week</p>
+              </div>
+
+              <div class="bg-govNavyDark/90 p-3.5 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400">Resolved Issues</p>
+                <p id="stat-resolved" class="text-2xl font-extrabold text-emerald-400 mt-1">124</p>
+                <p class="text-[10px] text-slate-300 mt-0.5">83.8% success rate</p>
+              </div>
+
+              <div class="bg-govNavyDark/90 p-3.5 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400">In Progress</p>
+                <p id="stat-progress" class="text-2xl font-extrabold text-sky-400 mt-1">18</p>
+                <p class="text-[10px] text-slate-300 mt-0.5">Crew dispatched</p>
+              </div>
+
+              <div class="bg-govNavyDark/90 p-3.5 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400">Under Review</p>
+                <p id="stat-submitted" class="text-2xl font-extrabold text-amber-400 mt-1">6</p>
+                <p class="text-[10px] text-slate-300 mt-0.5">Pending inspection</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Citizen Support & Emergency Contact (From image) -->
+          <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200 space-y-3">
+            <h3 class="font-bold text-govNavy text-sm flex items-center">
+              <i class="fa-solid fa-headset mr-2 text-sky-600"></i> Citizen Helpdesk & Toll-Free
+            </h3>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="p-2.5 bg-slate-50 rounded-lg">
+                <p class="text-slate-500">Municipal Helpline</p>
+                <p class="font-bold text-govNavy text-sm">1916 (Toll Free)</p>
+              </div>
+              <div class="p-2.5 bg-slate-50 rounded-lg">
+                <p class="text-slate-500">Electricity Emergency</p>
+                <p class="font-bold text-govNavy text-sm">1912 (BESCOM/CESC)</p>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-500">
+              <i class="fa-solid fa-lock mr-1 text-slate-400"></i> No personal phone numbers or private resident home addresses are stored or displayed publicly.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: REPORT AN ISSUE (Resident Form)    -->
+    <!-- ========================================== -->
+    <section id="view-report" class="hidden max-w-3xl mx-auto space-y-6">
+      
+      <!-- Form Header -->
+      <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-600 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-circle-plus"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-govNavy font-serif">Lodge a Civic Grievance</h2>
+            <p class="text-xs text-slate-500">Fill in the problem details. Your report will be immediately assigned a tracking code.</p>
+          </div>
+        </div>
+        
+        <div class="mt-4 p-3 bg-sky-50 rounded-lg border border-sky-100 flex items-start space-x-2 text-xs text-sky-900">
+          <i class="fa-solid fa-circle-info text-sky-600 mt-0.5"></i>
+          <p>
+            <strong>Privacy Guarantee:</strong> To protect citizen safety, you only need to provide a general landmark or area (e.g. "Near College Gate" or "Market Road Circle"). Do not enter your personal phone number or private home door number.
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Form -->
+      <form id="grievance-form" onsubmit="handleFormSubmit(event)" class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-5">
+        
+        <!-- Field 1: Category -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            Civic Issue Category <span class="text-rose-500">*</span>
+          </label>
+          <select id="issue-category" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm bg-white">
+            <option value="" disabled selected>-- Select Issue Type --</option>
+            <option value="Pothole & Roads">🛣️ Pothole & Road Damage</option>
+            <option value="Garbage & Waste">🗑️ Garbage Dump & Waste Accumulation</option>
+            <option value="Streetlight Fault">💡 Broken Streetlight / Darkness</option>
+            <option value="Water Supply Leak">💧 Water Supply Pipe Burst / Leakage</option>
+            <option value="Drainage & Sewage">🚰 Drainage Overflow & Clogged Gutter</option>
+            <option value="Public Sanitation & Others">🛡️ Public Sanitation & Others</option>
+          </select>
+        </div>
+
+        <!-- Field 2: Short Title -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            Short Title <span class="text-rose-500">*</span>
+          </label>
+          <input type="text" id="issue-title" required placeholder="e.g. Deep pothole causing two-wheelers to slip" maxlength="80"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm">
+          <p class="text-[11px] text-slate-400 mt-1">Keep it brief and specific (max 80 characters)</p>
+        </div>
+
+        <!-- Field 3: Landmark / Area -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            Nearby Landmark or Public Area <span class="text-rose-500">*</span>
+          </label>
+          <input type="text" id="issue-landmark" required placeholder="e.g. Near College Main Gate, Beside Bus Shelter"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm">
+          <p class="text-[11px] text-slate-400 mt-1">Specify nearby crossroads, building, college gate, or street name</p>
+        </div>
+
+        <!-- Field 4: Description -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            Detailed Description <span class="text-rose-500">*</span>
+          </label>
+          <textarea id="issue-description" rows="4" required placeholder="Describe the issue, how long it has persisted, and if it poses immediate danger to vehicles or pedestrians..."
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm"></textarea>
+        </div>
+
+        <!-- Field 5: Urgency & Resident Display Name -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              Urgency Level
+            </label>
+            <select id="issue-urgency" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm bg-white">
+              <option value="Normal">Normal (Routine resolution)</option>
+              <option value="High">High (Impacting traffic / hygiene)</option>
+              <option value="Emergency">Urgent / Safety Hazard</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              Resident Tag (Optional)
+            </label>
+            <input type="text" id="issue-reporter" placeholder="e.g. Concerned Citizen / Hostel Resident"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-govNavy focus:border-govNavy text-sm">
+          </div>
+        </div>
+
+        <!-- Field 6: Photo Upload with Preview -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            Attach Photo (Optional)
+          </label>
+          <div class="border-2 border-dashed border-slate-300 rounded-xl p-4 text-center hover:bg-slate-50 transition cursor-pointer relative" onclick="document.getElementById('photo-input').click()">
+            <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+            
+            <div id="upload-placeholder" class="space-y-1">
+              <i class="fa-solid fa-camera text-slate-400 text-3xl"></i>
+              <p class="text-xs text-slate-600 font-medium">Click to select a photo from your phone or PC</p>
+              <p class="text-[11px] text-slate-400">PNG, JPG or JPEG up to 5MB</p>
+            </div>
+
+            <!-- Preview Image (Hidden initially) -->
+            <div id="photo-preview-container" class="hidden mt-2 relative inline-block">
+              <img id="photo-preview" src="" alt="Issue Preview" class="h-40 rounded-lg object-cover border border-slate-200 shadow-sm mx-auto">
+              <button type="button" onclick="removePhoto(event)" class="absolute -top-2 -right-2 bg-rose-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow hover:bg-rose-700">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Sample image presets for presentation demo -->
+          <div class="mt-2 flex items-center space-x-2 text-[11px] text-slate-500">
+            <span>Demo presets:</span>
+            <button type="button" onclick="useSamplePhoto('pothole')" class="text-sky-700 hover:underline">Sample Pothole</button>
+            <span>•</span>
+            <button type="button" onclick="useSamplePhoto('garbage')" class="text-sky-700 hover:underline">Sample Garbage</button>
+            <span>•</span>
+            <button type="button" onclick="useSamplePhoto('light')" class="text-sky-700 hover:underline">Sample Streetlight</button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3">
+          <button type="submit" class="flex-1 bg-govNavy hover:bg-govNavyLight text-white font-bold py-3 px-6 rounded-lg text-sm shadow-md transition flex items-center justify-center">
+            <i class="fa-solid fa-paper-plane mr-2 text-amber-400"></i> Submit Grievance
+          </button>
+          <button type="button" onclick="resetForm()" class="px-5 py-3 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-sm font-medium transition">
+            Clear Form
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: TRACK GRIEVANCE (Search & Status)  -->
+    <!-- ========================================== -->
+    <section id="view-track" class="hidden max-w-3xl mx-auto space-y-6">
+      
+      <!-- Search Box -->
+      <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-4">
+        <div class="w-12 h-12 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center mx-auto text-xl">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-govNavy font-serif">Track Grievance Status</h2>
+        <p class="text-xs text-slate-500 max-w-md mx-auto">
+          Enter your unique Tracking Ticket ID (e.g., <span class="font-mono text-sky-700 font-semibold cursor-pointer underline" onclick="fillTracking('TKT-8941')">TKT-8941</span> or <span class="font-mono text-sky-700 font-semibold cursor-pointer underline" onclick="fillTracking('TKT-8938')">TKT-8938</span>) to inspect real-time progress and departmental remarks.
+        </p>
+
+        <div class="flex max-w-md mx-auto mt-4">
+          <input type="text" id="track-input" placeholder="e.g. TKT-8941" 
+            class="flex-1 px-4 py-2.5 rounded-l-lg border border-slate-300 uppercase font-mono text-sm focus:ring-2 focus:ring-govNavy focus:outline-none">
+          <button onclick="searchTicket()" class="bg-govNavy hover:bg-govNavyLight text-white px-5 py-2.5 rounded-r-lg font-bold text-sm transition">
+            Track
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Card (Populated by JS) -->
+      <div id="track-result" class="hidden">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: PUBLIC ISSUES FEED (All Reports)   -->
+    <!-- ========================================== -->
+    <section id="view-issues" class="hidden space-y-6">
+      
+      <!-- Header & Filter Bar -->
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-govNavy font-serif">Public Civic Transparency Board</h2>
+          <p class="text-xs text-slate-500">Live community complaints lodged by residents across local wards</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Status Filter Tabs -->
+          <div class="inline-flex rounded-lg bg-slate-100 p-1 text-xs font-semibold">
+            <button onclick="filterStatus('all')" id="filter-all" class="filter-tab px-3 py-1.5 rounded-md bg-white text-govNavy shadow-sm">All</button>
+            <button onclick="filterStatus('Submitted')" id="filter-Submitted" class="filter-tab px-3 py-1.5 rounded-md text-slate-600 hover:text-govNavy">Submitted</button>
+            <button onclick="filterStatus('In Progress')" id="filter-InProgress" class="filter-tab px-3 py-1.5 rounded-md text-slate-600 hover:text-govNavy">In Progress</button>
+            <button onclick="filterStatus('Resolved')" id="filter-Resolved" class="filter-tab px-3 py-1.5 rounded-md text-slate-600 hover:text-govNavy">Resolved</button>
+          </div>
+
+          <!-- Category Selector -->
+          <select id="feed-category-filter" onchange="applyFilters()" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 bg-white focus:ring-1 focus:ring-govNavy">
+            <option value="all">All Categories</option>
+            <option value="Pothole & Roads">Roads & Potholes</option>
+            <option value="Garbage & Waste">Garbage & Waste</option>
+            <option value="Streetlight Fault">Streetlights</option>
+            <option value="Water Supply Leak">Water Supply</option>
+            <option value="Drainage & Sewage">Drainage</option>
+            <option value="Public Sanitation & Others">Sanitation</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grievances Grid -->
+      <div id="grievances-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- SUCCESS SUBMISSION MODAL -->
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl text-center space-y-4 border border-slate-200 animate-in fade-in zoom-in duration-200">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      
+      <h3 class="text-xl font-bold text-govNavy font-serif">Grievance Successfully Lodged!</h3>
+      <p class="text-xs text-slate-500">Your issue has been logged into the municipal dispatch queue.</p>
+      
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left space-y-1">
+        <p class="text-[11px] text-slate-400 uppercase font-semibold">Your Tracking Ticket ID:</p>
+        <p id="modal-ticket-id" class="text-xl font-mono font-bold text-govNavy tracking-wider">TKT-8942</p>
+        <p class="text-[11px] text-slate-500">Save this code to check progress in the "Track Status" tab.</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="copyTicketAndTrack()" class="flex-1 bg-govNavy hover:bg-govNavyLight text-white font-bold py-2.5 px-4 rounded-lg text-xs transition">
+          <i class="fa-solid fa-magnifying-glass mr-1"></i> Track Ticket Now
+        </button>
+        <button onclick="closeModal()" class="px-4 py-2.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER (Matching user's reference image) -->
+  <footer class="bg-govNavyDark text-slate-400 text-xs py-8 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800">
+        <div class="flex items-center space-x-3 text-center sm:text-left">
+          <div class="w-10 h-10 bg-white rounded flex items-center justify-center text-govNavy">
+            <i class="fa-solid fa-landmark text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white font-serif">JanaSeva Civic Portal</h4>
+            <p class="text-[11px] text-slate-400">Public Grievance and Civic Issue Reporting System</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4 text-slate-400">
+          <span class="hover:text-white cursor-pointer" onclick="switchTab('home')">Home</span>
+          <span>•</span>
+          <span class="hover:text-white cursor-pointer" onclick="switchTab('report')">Report</span>
+          <span>•</span>
+          <span class="hover:text-white cursor-pointer" onclick="switchTab('track')">Track</span>
+          <span>•</span>
+          <span class="hover:text-white cursor-pointer" onclick="switchTab('issues')">Public Feed</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-2">
+        <p>© 2026 JanaSeva Public Grievance Portal • Citizen Civic Redressal System</p>
+        <p>No real citizen phone numbers or residential addresses stored.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Initial sample dataset representing realistic Indian college-town issues
+    const defaultIssues = [
+      {
+        id: "TKT-8941",
+        title: "Deep pothole causing two-wheelers to skid",
+        category: "Pothole & Roads",
+        landmark: "Near College Main Gate, Beside Bus Shelter",
+        description: "A wide crater has formed right where buses turn into the campus. Students on motorcycles have had near accidents during evening hours.",
+        urgency: "High",
+        status: "In Progress",
+        reporter: "Student Council Member",
+        date: "Nov 6, 2026",
+        photo: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60",
+        remarks: "Ward Junior Engineer inspected the site. PWD road patch team assigned, cold mix asphalt filling scheduled for Nov 8."
+      },
+      {
+        id: "TKT-8938",
+        title: "Streetlights non-functional for 4 days",
+        category: "Streetlight Fault",
+        landmark: "Library Road, electric poles #14 to #18",
+        description: "Entire stretch from the engineering library up to the boys hostel junction is pitch dark after 6:30 PM, creating safety concerns for girl students.",
+        urgency: "High",
+        status: "Resolved",
+        reporter: "Hostel Resident",
+        date: "Nov 4, 2026",
+        photo: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=60",
+        remarks: "BESCOM lineman replaced the faulty fuse assembly and installed two 65W LED street fixtures. Lighting verified active on Nov 5."
+      },
+      {
+        id: "TKT-8935",
+        title: "Overflowing municipal garbage bin",
+        category: "Garbage & Waste",
+        landmark: "Opposite College Canteen & Auto Stand",
+        description: "Unsegregated garbage and plastic packaging piling up onto the pedestrian footpath. Stray dogs gathering around the area.",
+        urgency: "Normal",
+        status: "Resolved",
+        reporter: "Local Shopkeeper",
+        date: "Nov 3, 2026",
+        photo: "https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=600&auto=format&fit=crop&q=60",
+        remarks: "Solid Waste Management compactor truck emptied the bins and sprayed bleaching powder for hygiene control."
+      },
+      {
+        id: "TKT-8940",
+        title: "Drinking water distribution pipe leaking onto road",
+        category: "Water Supply Leak",
+        landmark: "Vidyanagar 3rd Cross, near Community Park",
+        description: "Clean potable water has been gushing out from the underground joint since yesterday morning, flooding the corner lane.",
+        urgency: "Normal",
+        status: "In Progress",
+        reporter: "Resident Association",
+        date: "Nov 6, 2026",
+        photo: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&auto=format&fit=crop&q=60",
+        remarks: "Water supply board pipeline maintenance team notified. Valve shutoff scheduled to fix the gasket joint."
+      },
+      {
+        id: "TKT-8943",
+        title: "Clogged stormwater drain overflowing during rains",
+        category: "Drainage & Sewage",
+        landmark: "Behind Polytechnic Bus Stand",
+        description: "Accumulated plastic bottles and silt have choked the culvert, causing black water to pool on the walking road.",
+        urgency: "Normal",
+        status: "Submitted",
+        reporter: "Concerned Resident",
+        date: "Nov 7, 2026",
+        photo: "",
+        remarks: "Grievance received and dispatched to Sanitary Supervisor for site inspection."
+      }
+    ];
+
+    // Initialize LocalStorage with sample data if not present
+    function getIssues() {
+      const stored = localStorage.getItem('janaseva_issues');
+      if (!stored) {
+        localStorage.setItem('janaseva_issues', JSON.stringify(defaultIssues));
+        return defaultIssues;
+      }
+      return JSON.parse(stored);
+    }
+
+    function saveIssues(issues) {
+      localStorage.setItem('janaseva_issues', JSON.stringify(issues));
+      updateStats();
+      renderIssues();
+    }
+
+    // Active state variables
+    let currentPhotoBase64 = "";
+    let activeStatusFilter = "all";
+    let latestCreatedTicketId = "";
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      const tabs = ['home', 'report', 'track', 'issues'];
+      tabs.forEach(t => {
+        const view = document.getElementById(`view-${t}`);
+        const navBtn = document.getElementById(`nav-${t}`);
+        if (view) {
+          if (t === tabId) {
+            view.classList.remove('hidden');
+          } else {
+            view.classList.add('hidden');
+          }
+        }
+        if (navBtn) {
+          if (t === tabId) {
+            navBtn.classList.add('bg-govNavyLight', 'text-white');
+            navBtn.classList.remove('text-slate-200');
+          } else {
+            navBtn.classList.remove('bg-govNavyLight', 'text-white');
+            navBtn.classList.add('text-slate-200');
+          }
+        }
+      });
+
+      // Close mobile menu if open
+      const mobMenu = document.getElementById('mobile-menu');
+      if (mobMenu) mobMenu.classList.add('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      const mobMenu = document.getElementById('mobile-menu');
+      mobMenu.classList.toggle('hidden');
+    }
+
+    // Prefill category from Home cards
+    function prefillAndReport(categoryName) {
+      switchTab('report');
+      const select = document.getElementById('issue-category');
+      if (select) {
+        select.value = categoryName;
+      }
+    }
+
+    // Photo Handling
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentPhotoBase64 = e.target.result;
+        showPhotoPreview(currentPhotoBase64);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showPhotoPreview(url) {
+      const preview = document.getElementById('photo-preview');
+      const container = document.getElementById('photo-preview-container');
+      const placeholder = document.getElementById('upload-placeholder');
+      
+      preview.src = url;
+      container.classList.remove('hidden');
+      placeholder.classList.add('hidden');
+    }
+
+    function removePhoto(event) {
+      if (event) event.stopPropagation();
+      currentPhotoBase64 = "";
+      document.getElementById('photo-input').value = "";
+      document.getElementById('photo-preview').src = "";
+      document.getElementById('photo-preview-container').classList.add('hidden');
+      document.getElementById('upload-placeholder').classList.remove('hidden');
+    }
+
+    function useSamplePhoto(type) {
+      const samples = {
+        pothole: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60",
+        garbage: "https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?w=600&auto=format&fit=crop&q=60",
+        light: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=60"
+      };
+      currentPhotoBase64 = samples[type] || "";
+      showPhotoPreview(currentPhotoBase64);
+    }
+
+    // Form Submission
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
+      const category = document.getElementById('issue-category').value;
+      const title = document.getElementById('issue-title').value.trim();
+      const landmark = document.getElementById('issue-landmark').value.trim();
+      const description = document.getElementById('issue-description').value.trim();
+      const urgency = document.getElementById('issue-urgency').value;
+      const reporter = document.getElementById('issue-reporter').value.trim() || "Resident";
+
+      if (!category || !title || !landmark || !description) {
+        alert("Please fill in all mandatory fields.");
+        return;
+      }
+
+      // Generate Ticket ID
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      const newTicketId = `TKT-${randomNum}`;
+      latestCreatedTicketId = newTicketId;
+
+      const newIssue = {
+        id: newTicketId,
+        title,
+        category,
+        landmark,
+        description,
+        urgency,
+        status: "Submitted",
+        reporter,
+        date: "Today (" + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ")",
+        photo: currentPhotoBase64,
+        remarks: "Grievance received and registered into the civic dispatch queue."
+      };
+
+      const issues = getIssues();
+      issues.unshift(newIssue);
+      saveIssues(issues);
+
+      // Show Success Modal
+      document.getElementById('modal-ticket-id').textContent = newTicketId;
+      document.getElementById('success-modal').classList.remove('hidden');
+
+      resetForm();
+    }
+
+    function resetForm() {
+      document.getElementById('grievance-form').reset();
+      removePhoto();
+    }
+
+    function closeModal() {
+      document.getElementById('success-modal').classList.add('hidden');
+    }
+
+    function copyTicketAndTrack() {
+      closeModal();
+      switchTab('track');
+      fillTracking(latestCreatedTicketId);
+      searchTicket();
+    }
+
+    // Tracking Logic
+    function fillTracking(id) {
+      document.getElementById('track-input').value = id;
+    }
+
+    function searchTicket() {
+      const query = document.getElementById('track-input').value.trim().toUpperCase();
+      const resultContainer = document.getElementById('track-result');
+
+      if (!query) {
+        alert("Please enter a ticket ID to track.");
+        return;
+      }
+
+      const issues = getIssues();
+      const found = issues.find(i => i.id.toUpperCase() === query);
+
+      if (!found) {
+        resultContainer.innerHTML = `
+          <div class="bg-rose-50 border border-rose-200 text-rose-800 p-5 rounded-xl text-center space-y-2">
+            <i class="fa-solid fa-triangle-exclamation text-2xl text-rose-600"></i>
+            <h4 class="font-bold text-sm">Ticket ID "${query}" Not Found</h4>
+            <p class="text-xs text-rose-600">Please check the ticket number. Try searching for <span class="font-mono font-bold underline cursor-pointer" onclick="fillTracking('TKT-8941'); searchTicket();">TKT-8941</span>.</p>
+          </div>
+        `;
+        resultContainer.classList.remove('hidden');
+        return;
+      }
+
+      // Progress bar calculations
+      let step = 1;
+      let stepColor = "text-amber-600";
+      if (found.status === "In Progress") {
+        step = 2;
+        stepColor = "text-sky-600";
+      } else if (found.status === "Resolved") {
+        step = 3;
+        stepColor = "text-emerald-600";
+      }
+
+      resultContainer.innerHTML = `
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 space-y-6 animate-in fade-in duration-200">
+          
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100">
+            <div>
+              <span class="text-xs text-slate-400 font-mono">TICKET NUMBER</span>
+              <h3 class="text-xl font-bold font-mono text-govNavy">${found.id}</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs px-2.5 py-1 rounded font-semibold ${getStatusBadge(found.status)}">
+                ● ${found.status}
+              </span>
+            </div>
+          </div>
+
+          <!-- Progress Stepper -->
+          <div class="py-2">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Resolution Progress</p>
+            <div class="relative flex items-center justify-between">
+              <!-- Connecting Line -->
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 -z-0"></div>
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-emerald-500 -z-0 transition-all duration-500" style="width: ${step === 1 ? '10%' : step === 2 ? '50%' : '100%'}"></div>
+
+              <!-- Step 1 -->
+              <div class="relative z-10 text-center">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${step >= 1 ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500'} mx-auto">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="text-[11px] font-semibold text-slate-700 mt-1.5">Submitted</p>
+                <p class="text-[10px] text-slate-400">Issue Logged</p>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="relative z-10 text-center">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${step >= 2 ? 'bg-sky-600 text-white' : 'bg-slate-200 text-slate-500'} mx-auto">
+                  ${step >= 2 ? '<i class="fa-solid fa-person-digging"></i>' : '2'}
+                </div>
+                <p class="text-[11px] font-semibold text-slate-700 mt-1.5">In Progress</p>
+                <p class="text-[10px] text-slate-400">Crew Assigned</p>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="relative z-10 text-center">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${step === 3 ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500'} mx-auto">
+                  ${step === 3 ? '<i class="fa-solid fa-circle-check"></i>' : '3'}
+                </div>
+                <p class="text-[11px] font-semibold text-slate-700 mt-1.5">Resolved</p>
+                <p class="text-[10px] text-slate-400">Fixed & Verified</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grievance Info -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div>
+              <p class="text-slate-400 font-semibold uppercase">Category</p>
+              <p class="font-bold text-slate-800 text-sm mt-0.5">${found.category}</p>
+            </div>
+            <div>
+              <p class="text-slate-400 font-semibold uppercase">Landmark / Location</p>
+              <p class="font-bold text-slate-800 text-sm mt-0.5">${found.landmark}</p>
+            </div>
+            <div class="md:col-span-2">
+              <p class="text-slate-400 font-semibold uppercase">Issue Summary</p>
+              <p class="text-slate-700 mt-0.5">${found.title}</p>
+              <p class="text-slate-500 text-[11px] mt-1">${found.description}</p>
+            </div>
+          </div>
+
+          ${found.photo ? `
+            <div>
+              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Attached Site Evidence</p>
+              <img src="${found.photo}" alt="Site Photo" class="h-48 w-full object-cover rounded-xl border border-slate-200">
+            </div>
+          ` : ''}
+
+          <!-- Official Administrative Remarks -->
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs space-y-1">
+            <div class="flex items-center space-x-1.5 text-amber-900 font-bold">
+              <i class="fa-solid fa-clipboard-user"></i>
+              <span>Municipal / Ward Officer Action Note:</span>
+            </div>
+            <p class="text-amber-800 leading-relaxed">${found.remarks || "Under inspection by ward maintenance squad."}</p>
+          </div>
+
+        </div>
+      `;
+      resultContainer.classList.remove('hidden');
+    }
+
+    // Helper for status styles
+    function getStatusBadge(status) {
+      if (status === "Resolved") return "bg-emerald-100 text-emerald-800 border border-emerald-300";
+      if (status === "In Progress") return "bg-sky-100 text-sky-800 border border-sky-300";
+      return "bg-amber-100 text-amber-800 border border-amber-300";
+    }
+
+    // Public Issues Feed Filtering & Rendering
+    function filterStatus(status) {
+      activeStatusFilter = status;
+      ['all', 'Submitted', 'InProgress', 'Resolved'].forEach(s => {
+        const btn = document.getElementById(`filter-${s}`);
+        if (btn) {
+          if ((status === 'all' && s === 'all') || (status === 'Submitted' && s === 'Submitted') || (status === 'In Progress' && s === 'InProgress') || (status === 'Resolved' && s === 'Resolved')) {
+            btn.className = "filter-tab px-3 py-1.5 rounded-md bg-white text-govNavy shadow-sm";
+          } else {
+            btn.className = "filter-tab px-3 py-1.5 rounded-md text-slate-600 hover:text-govNavy";
+          }
+        }
+      });
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const catFilter = document.getElementById('feed-category-filter').value;
+      const issues = getIssues();
+
+      const filtered = issues.filter(issue => {
+        const matchesStatus = (activeStatusFilter === 'all') || (issue.status === activeStatusFilter);
+        const matchesCat = (catFilter === 'all') || (issue.category === catFilter);
+        return matchesStatus && matchesCat;
+      });
+
+      renderGrid(filtered);
+    }
+
+    function renderGrid(issuesList) {
+      const grid = document.getElementById('grievances-grid');
+      if (!grid) return;
+
+      if (issuesList.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 bg-white rounded-xl border border-dashed border-slate-300">
+            <i class="fa-solid fa-inbox text-4xl mb-2 text-slate-300"></i>
+            <p class="text-sm font-semibold text-slate-600">No issues found matching the selected filter</p>
+            <p class="text-xs text-slate-400 mt-1">Try switching back to 'All' or choose another category</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = issuesList.map(item => `
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-slate-200 overflow-hidden flex flex-col justify-between">
+          <div>
+            ${item.photo ? `
+              <div class="h-40 w-full overflow-hidden bg-slate-100">
+                <img src="${item.photo}" alt="${item.title}" class="w-full h-full object-cover">
+              </div>
+            ` : `
+              <div class="h-24 w-full bg-slate-50 flex items-center justify-center text-slate-300 border-b border-slate-100">
+                <i class="fa-solid fa-camera-slash text-2xl"></i>
+              </div>
+            `}
+            
+            <div class="p-4 space-y-2.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-mono text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.id}</span>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded ${getStatusBadge(item.status)}">
+                  ● ${item.status}
+                </span>
+              </div>
+
+              <h4 class="font-bold text-slate-800 text-sm leading-snug">${item.title}</h4>
+              
+              <div class="flex items-center text-xs text-slate-500 space-x-1.5">
+                <i class="fa-solid fa-location-dot text-rose-500"></i>
+                <span class="truncate">${item.landmark}</span>
+              </div>
+
+              <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">${item.description}</p>
+            </div>
+          </div>
+
+          <div class="p-4 pt-0">
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+              <span><i class="fa-regular fa-clock mr-1"></i> ${item.date}</span>
+              <button onclick="switchTab('track'); fillTracking('${item.id}'); searchTicket();" class="text-sky-700 hover:text-sky-900 font-semibold">
+                Inspect Details →
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderIssues() {
+      applyFilters();
+    }
+
+    // Update Statistics
+    function updateStats() {
+      const issues = getIssues();
+      const total = issues.length;
+      const resolved = issues.filter(i => i.status === "Resolved").length;
+      const progress = issues.filter(i => i.status === "In Progress").length;
+      const submitted = issues.filter(i => i.status === "Submitted").length;
+
+      const totalEl = document.getElementById('stat-total');
+      const resolvedEl = document.getElementById('stat-resolved');
+      const progressEl = document.getElementById('stat-progress');
+      const submittedEl = document.getElementById('stat-submitted');
+
+      if (totalEl) totalEl.textContent = total;
+      if (resolvedEl) resolvedEl.textContent = resolved;
+      if (progressEl) progressEl.textContent = progress;
+      if (submittedEl) submittedEl.textContent = submitted;
+    }
+
+    // On Load
+    document.addEventListener('DOMContentLoaded', () => {
+      getIssues();
+      updateStats();
+      renderIssues();
+    });
+  </script>
+</body>
+</html>

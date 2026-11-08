@@ -1,0 +1,9 @@
+Command exited with code 0.
+
+Command output:
+
+CommandType     Name                                               Version    Source                                   
+-----------     ----                                               -------    ------                                   
+Application     winget.exe                                         0.0.0.0    C:\Users\pinkm\AppData\Local\Microsoft...
+
+

@@ -1,0 +1,13 @@
+Command exited with code 1.
+
+Command output:
+[1804:15736:1107/231057.280:ERROR:chrome\browser\component_updater\edge_optimization_guide_models_manifest_installer.cc:264] Edge LLM: catalog update failed: 5
+[1804:15736:1107/231057.317:ERROR:chrome\browser\component_updater\edge_language_detection_model_installer.cc:97] Edge Language Detection Model: On-demand update failed with error: 5
+
+  <title>JanaSeva - Public Grievance &amp; Civic Issue Reporting Portal</title>
+              <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-white font-serif">JanaSeva</h1>
+              Serving Citizens with <br><span class="text-amber-400">Transparency and Trust</span>
+            <h4 class="text-sm font-bold text-white font-serif">JanaSeva Civic Portal</h4>
+        <p>© 2026 JanaSeva Public Grievance Portal • Citizen Civic Redressal System</p>
+
+

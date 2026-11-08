@@ -1,0 +1,27 @@
+Command exited with code 1.
+
+Command output:
+New-Item : Access to the path 'css' is denied.
+At line:1 char:208
++ ... } catch {}; New-Item -ItemType Directory -Force -Path "css", "js", "a ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Public Griev...e reporting\css:String) [New-Item], UnauthorizedAcc 
+   essException
+    + FullyQualifiedErrorId : CreateDirectoryUnauthorizedAccessError,Microsoft.PowerShell.Commands.NewItemCommand
+ 
+New-Item : Access to the path 'js' is denied.
+At line:1 char:208
++ ... } catch {}; New-Item -ItemType Directory -Force -Path "css", "js", "a ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Public Griev...ue reporting\js:String) [New-Item], UnauthorizedAcc 
+   essException
+    + FullyQualifiedErrorId : CreateDirectoryUnauthorizedAccessError,Microsoft.PowerShell.Commands.NewItemCommand
+ 
+New-Item : Access to the path 'assets' is denied.
+At line:1 char:208
++ ... } catch {}; New-Item -ItemType Directory -Force -Path "css", "js", "a ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Public Griev...eporting\assets:String) [New-Item], UnauthorizedAcc 
+   essException
+    + FullyQualifiedErrorId : CreateDirectoryUnauthorizedAccessError,Microsoft.PowerShell.Commands.NewItemCommand
+ 

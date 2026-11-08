@@ -1,0 +1,20 @@
+Command exited with code 1.
+
+Command output:
+Program 'python.exe' failed to run: The file cannot be accessed by the systemAt line:1 char:208
++ ... OutputEncoding = $OutputEncoding } catch {}; python --version; node - ...
++                                                  ~~~~~~~~~~~~~~~~.
+At line:1 char:208
++ ... OutputEncoding = $OutputEncoding } catch {}; python --version; node - ...
++                                                  ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ApplicationFailedException
+    + FullyQualifiedErrorId : NativeCommandFailed
+ 
+node : The term 'node' is not recognized as the name of a cmdlet, function, script file, or operable program. Check 
+the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:226
++ ... Encoding = $OutputEncoding } catch {}; python --version; node --versi ...
++                                                              ~~~~
+    + CategoryInfo          : ObjectNotFound: (node:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 

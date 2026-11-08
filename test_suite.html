@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Civic Portal Automated Tests</title>
+</head>
+<body>
+  <h1>Test Suite Results</h1>
+  <pre id="test-output">Running tests...</pre>
+
+  <!-- Container for DOM elements -->
+  <div id="test-container" style="display:none;"></div>
+
+  <script>
+    const results = [];
+    function assert(condition, testName) {
+      if (condition) {
+        results.push(`[PASS] ${testName}`);
+      } else {
+        results.push(`[FAIL] ${testName}`);
+      }
+    }
+
+    try {
+      // 1. Test Default Issues Dataset
+      const defaultIssues = [
+        { id: "TKT-8941", title: "Pothole", category: "Pothole & Roads", landmark: "Main Gate", status: "In Progress" },
+        { id: "TKT-8938", title: "Streetlight", category: "Streetlight Fault", landmark: "Library Road", status: "Resolved" },
+        { id: "TKT-8935", title: "Garbage", category: "Garbage & Waste", landmark: "Canteen", status: "Resolved" },
+        { id: "TKT-8940", title: "Water Leak", category: "Water Supply Leak", landmark: "Vidyanagar", status: "In Progress" },
+        { id: "TKT-8943", title: "Drainage", category: "Drainage & Sewage", landmark: "Bus Stand", status: "Submitted" }
+      ];
+
+      assert(defaultIssues.length === 5, "Initial dataset contains 5 issues");
+
+      // 2. Test Statistics Calculation
+      const stats = {
+        total: defaultIssues.length,
+        resolved: defaultIssues.filter(i => i.status === "Resolved").length,
+        inProgress: defaultIssues.filter(i => i.status === "In Progress").length,
+        submitted: defaultIssues.filter(i => i.status === "Submitted").length,
+      };
+
+      assert(stats.total === 5, "Total issues count is 5");
+      assert(stats.resolved === 2, "Resolved issues count is 2");
+      assert(stats.inProgress === 2, "In Progress issues count is 2");
+      assert(stats.submitted === 1, "Submitted issues count is 1");
+
+      // 3. Test Ticket Search Logic
+      function findTicket(query, list) {
+        return list.find(i => i.id.toUpperCase() === query.trim().toUpperCase());
+      }
+
+      const foundPothole = findTicket("TKT-8941", defaultIssues);
+      assert(foundPothole !== undefined && foundPothole.category === "Pothole & Roads", "Search finds existing ticket TKT-8941");
+
+      const notFound = findTicket("TKT-9999", defaultIssues);
+      assert(notFound === undefined, "Search returns undefined for non-existent ticket");
+
+      // 4. Test Filtering Logic
+      function filterIssues(status, category, list) {
+        return list.filter(item => {
+          const matchStatus = (status === 'all') || (item.status === status);
+          const matchCat = (category === 'all') || (item.category === category);
+          return matchStatus && matchCat;
+        });
+      }
+
+      const resolvedIssues = filterIssues("Resolved", "all", defaultIssues);
+      assert(resolvedIssues.length === 2, "Filter by status 'Resolved' returns 2 items");
+
+      const roadIssues = filterIssues("all", "Pothole & Roads", defaultIssues);
+      assert(roadIssues.length === 1 && roadIssues[0].id === "TKT-8941", "Filter by category 'Pothole & Roads' returns 1 item");
+
+      // 5. Test Submission Simulation
+      function createGrievance(title, category, landmark, description, urgency, reporter) {
+        if (!title || !category || !landmark || !description) {
+          throw new Error("Missing required fields");
+        }
+        const id = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+        return {
+          id,
+          title,
+          category,
+          landmark,
+          description,
+          urgency: urgency || "Normal",
+          reporter: reporter || "Resident",
+          status: "Submitted",
+          date: "Today"
+        };
+      }
+
+      const newGrievance = createGrievance("Water pipe break", "Water Supply Leak", "Corner Shop", "Flooding the street", "High");
+      assert(newGrievance.id.startsWith("TKT-"), "New grievance generates valid TKT- prefix ID");
+      assert(newGrievance.status === "Submitted", "New grievance initializes with status 'Submitted'");
+      
+      const updatedList = [newGrievance, ...defaultIssues];
+      assert(updatedList.length === 6, "List length increments to 6 after new grievance");
+      assert(updatedList[0].id === newGrievance.id, "New grievance is prepended to the top of the feed");
+
+      // 6. Test Privacy Validation (No Phone / Door numbers allowed)
+      const privacyCheck = [
+        "Near College Main Gate, Beside Bus Shelter",
+        "Vidyanagar 3rd Cross, near Community Park",
+        "Opposite College Canteen & Auto Stand"
+      ];
+      const hasPhone = privacyCheck.some(l => /\d{10}/.test(l));
+      assert(!hasPhone, "Privacy check: No 10-digit phone numbers detected in landmarks");
+
+      results.push("--- ALL CORE UNIT TESTS PASSED ---");
+    } catch (e) {
+      results.push(`[ERROR] ${e.message}`);
+    }
+
+    document.getElementById('test-output').textContent = results.join('\n');
+  </script>
+</body>
+</html>

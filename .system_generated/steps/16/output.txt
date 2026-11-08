@@ -1,0 +1,8 @@
+Command exited with code 0.
+
+Command output:
+C:\Public Grieviance and civic issue reporting NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
+                                               BUILTIN\Administrators:(I)(OI)(CI)(F)
+                                               BUILTIN\Users:(I)(OI)(CI)(RX)
+
+Successfully processed 1 files; Failed processing 0 files

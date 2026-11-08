@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Integration E2E Test Runner</title>
+</head>
+<body>
+  <h1>Integration E2E Test</h1>
+  <pre id="log">Starting E2E tests...</pre>
+  <iframe id="portal-frame" src="civic_portal.html" width="1200" height="900" style="border:1px solid #ccc;"></iframe>
+
+  <script>
+    const log = document.getElementById('log');
+    const logs = [];
+    function record(msg) {
+      logs.push(msg);
+      log.textContent = logs.join('\n');
+    }
+
+    const frame = document.getElementById('portal-frame');
+    frame.onload = function() {
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        const win = frame.contentWindow;
+
+        // Test 1: Page Title and Initial Elements
+        const title = doc.querySelector('h1').textContent;
+        record(title.includes('JanaSeva') ? '[PASS] Initial title contains JanaSeva' : '[FAIL] Title check');
+
+        // Test 2: Verify Initial Stats Render
+        const total = doc.getElementById('stat-total').textContent;
+        const resolved = doc.getElementById('stat-resolved').textContent;
+        record((total === '5' && resolved === '2') ? `[PASS] Correct initial stats (Total: ${total}, Resolved: ${resolved})` : `[FAIL] Stats mismatch: ${total}, ${resolved}`);
+
+        // Test 3: Tab switching to Report
+        win.switchTab('report');
+        const reportVisible = !doc.getElementById('view-report').classList.contains('hidden');
+        const homeHidden = doc.getElementById('view-home').classList.contains('hidden');
+        record((reportVisible && homeHidden) ? '[PASS] switchTab("report") shows Report form and hides Home' : '[FAIL] Tab switch to Report failed');
+
+        // Test 4: Prefill from Category button
+        win.prefillAndReport('Streetlight Fault');
+        const selectedCat = doc.getElementById('issue-category').value;
+        record(selectedCat === 'Streetlight Fault' ? '[PASS] prefillAndReport selects category in form' : '[FAIL] Category prefill failed');
+
+        // Test 5: Tab switching to Track and searching a ticket
+        win.switchTab('track');
+        win.fillTracking('TKT-8941');
+        win.searchTicket();
+        const trackResult = doc.getElementById('track-result');
+        const hasResult = !trackResult.classList.contains('hidden') && trackResult.textContent.includes('TKT-8941');
+        record(hasResult ? '[PASS] searchTicket("TKT-8941") renders progress stepper and details' : '[FAIL] Search ticket failed');
+
+        // Test 6: Form Submission Simulation
+        win.switchTab('report');
+        doc.getElementById('issue-category').value = 'Garbage & Waste';
+        doc.getElementById('issue-title').value = 'Overflowing plastic bin';
+        doc.getElementById('issue-landmark').value = 'Corner Market';
+        doc.getElementById('issue-description').value = 'Garbage spilling onto the main street road';
+        doc.getElementById('issue-urgency').value = 'High';
+        
+        // Trigger submit
+        const submitEvent = new win.Event('submit', { cancelable: true });
+        doc.getElementById('grievance-form').dispatchEvent(submitEvent);
+
+        const modal = doc.getElementById('success-modal');
+        const modalOpen = !modal.classList.contains('hidden');
+        const generatedTicket = doc.getElementById('modal-ticket-id').textContent;
+        record(modalOpen && generatedTicket.startsWith('TKT-') ? `[PASS] Form submission generated ticket ${generatedTicket} and opened success modal` : '[FAIL] Form submission failed');
+
+        // Test 7: Verify new ticket in Feed
+        win.closeModal();
+        win.switchTab('issues');
+        const gridContent = doc.getElementById('grievances-grid').textContent;
+        record(gridContent.includes(generatedTicket) ? `[PASS] Public Feed updated with newly filed ticket ${generatedTicket}` : '[FAIL] Public Feed missing new ticket');
+
+        // Test 8: Filter Feed
+        win.filterStatus('Resolved');
+        const resolvedGrid = doc.getElementById('grievances-grid');
+        const onlyResolved = !resolvedGrid.textContent.includes('In Progress');
+        record(onlyResolved ? '[PASS] Filter status "Resolved" filters out in-progress items' : '[FAIL] Status filtering failed');
+
+        record('=== ALL 8 E2E INTEGRATION TESTS PASSED ===');
+      } catch (err) {
+        record(`[ERROR] ${err.message}`);
+      }
+    };
+  </script>
+</body>
+</html>

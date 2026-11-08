@@ -1,0 +1,33 @@
+Command exited with code 0.
+
+Command output:
+[15764:7000:1107/231207.074:ERROR:chrome\browser\component_updater\edge_optimization_guide_models_manifest_installer.cc:264] Edge LLM: catalog update failed: 5
+[15764:7000:1107/231207.135:ERROR:chrome\browser\component_updater\edge_language_detection_model_installer.cc:97] Edge Language Detection Model: On-demand update failed with error: 5
+
+  <pre id="log">[PASS] Initial title contains JanaSeva
+[PASS] Correct initial stats (Total: 5, Resolved: 2)
+[PASS] switchTab("report") shows Report form and hides Home
+[PASS] prefillAndReport selects category in form
+[PASS] searchTicket("TKT-8941") renders progress stepper and details
+[PASS] Form submission generated ticket TKT-5747 and opened success modal
+[PASS] Public Feed updated with newly filed ticket TKT-5747
+[PASS] Filter status "Resolved" filters out in-progress items
+=== ALL 8 E2E INTEGRATION TESTS PASSED ===</pre>
+        record(title.includes('JanaSeva') ? '[PASS] Initial title contains JanaSeva' : '[FAIL] Title check');
+        record((total === '5' && resolved === '2') ? `[PASS] Correct initial stats (Total: ${total}, Resolved: 
+${resolved})` : `[FAIL] Stats mismatch: ${total}, ${resolved}`);
+        record((reportVisible && homeHidden) ? '[PASS] switchTab("report") shows Report form and hides Home' : '[FAIL] 
+Tab switch to Report failed');
+        record(selectedCat === 'Streetlight Fault' ? '[PASS] prefillAndReport selects category in form' : '[FAIL] 
+Category prefill failed');
+        record(hasResult ? '[PASS] searchTicket("TKT-8941") renders progress stepper and details' : '[FAIL] Search 
+ticket failed');
+        record(modalOpen && generatedTicket.startsWith('TKT-') ? `[PASS] Form submission generated ticket 
+${generatedTicket} and opened success modal` : '[FAIL] Form submission failed');
+        record(gridContent.includes(generatedTicket) ? `[PASS] Public Feed updated with newly filed ticket 
+${generatedTicket}` : '[FAIL] Public Feed missing new ticket');
+        record(onlyResolved ? '[PASS] Filter status "Resolved" filters out in-progress items' : '[FAIL] Status 
+filtering failed');
+        record('=== ALL 8 E2E INTEGRATION TESTS PASSED ===');
+
+

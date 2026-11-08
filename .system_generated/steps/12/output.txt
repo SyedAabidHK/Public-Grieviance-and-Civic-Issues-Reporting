@@ -1,0 +1,5 @@
+Command exited with code 1.
+
+Command output:
+C:\Public Grieviance and civic issue reporting: Access is denied.
+Successfully processed 0 files; Failed processing 1 files

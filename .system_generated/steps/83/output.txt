@@ -1,0 +1,48 @@
+Command exited with code 0.
+
+Command output:
+
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:45:        <i 
+class="fa-solid fa-graduation-cap mr-1.5"></i> VTU Community Project 1BCP308
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:46:      </span>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:47:      <span 
+class="hidden md:inline text-slate-500">|</span>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:94:            <i 
+class="fa-solid fa-book-open mr-1.5 text-sky-400"></i> VTU 1BCP308
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:95:          
+</button>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:96:        </nav>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:118:      <button 
+onclick="switchTab('project')" class="w-full text-left px-3 py-2 rounded text-sm text-slate-200 font-medium 
+hover:bg-govNavyLight"><i class="fa-solid fa-book-open mr-2 text-sky-400"></i> VTU Project Details (1BCP308)</button>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:119:    </div>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:120:  </header>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:619:    <!-- VIEW 5: 
+VTU COMMUNITY PROJECT (1BCP308)   -->
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:620:    <!-- 
+========================================== -->
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:621:    <section 
+id="view-project" class="hidden max-w-4xl mx-auto space-y-6">
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:622:      
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:623:      <!-- 
+Academic Header -->
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:628:            <h2 
+class="text-2xl font-bold font-serif mt-2">Course: Community Project (1BCP308)</h2>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:629:            <p 
+class="text-xs text-slate-300">Visvesvaraya Technological University, Belagavi, Karnataka</p>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:630:          </div>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:745:            <p 
+class="text-[11px] text-slate-400">VTU 1BCP308 Community Social Innovation Initiative</p>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:746:          </div>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:747:        </div>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:756:          <span 
+class="hover:text-white cursor-pointer" onclick="switchTab('project')">VTU 1BCP308</span>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:757:        </div>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:758:      </div>
+> C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:761:        <p>© 
+2026 JanaSeva Public Grievance Portal • Developed for VTU 1BCP308 Academic Evaluation</p>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:762:        <p>No 
+real citizen phone numbers or residential addresses stored.</p>
+  C:\Users\pinkm\.gemini\antigravity\brain\a5b231a2-4f86-4de8-aef6-e2920d9db8fb\civic_portal.html:763:      </div>
+
+

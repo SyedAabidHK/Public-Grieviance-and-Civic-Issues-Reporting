@@ -1,0 +1,26 @@
+Command exited with code 0.
+
+Command output:
+[11324:15848:1107/231148.864:ERROR:chrome\browser\component_updater\edge_optimization_guide_models_manifest_installer.cc:264] Edge LLM: catalog update failed: 5
+[11324:15848:1107/231148.977:ERROR:chrome\browser\component_updater\edge_language_detection_model_installer.cc:97] Edge Language Detection Model: On-demand update failed with error: 5
+
+  <pre id="test-output">[PASS] Initial dataset contains 5 issues
+[PASS] Total issues count is 5
+[PASS] Resolved issues count is 2
+[PASS] In Progress issues count is 2
+[PASS] Submitted issues count is 1
+[PASS] Search finds existing ticket TKT-8941
+[PASS] Search returns undefined for non-existent ticket
+[PASS] Filter by status 'Resolved' returns 2 items
+[PASS] Filter by category 'Pothole &amp; Roads' returns 1 item
+[PASS] New grievance generates valid TKT- prefix ID
+[PASS] New grievance initializes with status 'Submitted'
+[PASS] List length increments to 6 after new grievance
+[PASS] New grievance is prepended to the top of the feed
+[PASS] Privacy check: No 10-digit phone numbers detected in landmarks
+--- ALL CORE UNIT TESTS PASSED ---</pre>
+        results.push(`[PASS] ${testName}`);
+        results.push(`[FAIL] ${testName}`);
+      results.push("--- ALL CORE UNIT TESTS PASSED ---");
+
+
